@@ -2,8 +2,11 @@ name: Update Blogger Posts
 
 on:
   schedule:
-    - cron: "0 */12 * * *"  # Runs every 12 hours
-  workflow_dispatch:       # Allows manual run
+    - cron: "0 */12 * * *"  # every 12 hours
+  workflow_dispatch:       # manual trigger
+
+permissions:
+  contents: write
 
 jobs:
   update-posts:
@@ -13,15 +16,78 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Fetch RSS feed
-        uses: zwaldowski/rss-to-readme@v1
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          url: "https://blog.iamsukanta.com/feeds/posts/default?alt=rss"
-          format: "- [{{ title }}]({{ link }})"
-          limit: 3
+          python-version: '3.x'
 
-      - name: Commit updated README
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Update latest blog posts"
-          file_pattern: README.md
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip feedparser requests
+
+      - name: Fetch RSS and update README
+        env:
+          RSS_URL: "https://blog.iamsukanta.com/feeds/posts/default?alt=rss"
+          START_MARKER: "<!-- BLOG-POST-LIST:START -->"
+          END_MARKER: "<!-- BLOG-POST-LIST:END -->"
+        run: |
+          python - <<'PY'
+          import os, re, sys
+          import feedparser
+          rss = os.environ['RSS_URL']
+          start = os.environ['START_MARKER']
+          end = os.environ['END_MARKER']
+
+          d = feedparser.parse(rss)
+          if not d.entries:
+            print("No entries found or failed to parse RSS feed:", rss)
+            sys.exit(0)
+
+          items = d.entries[:3]
+          lines = []
+          for e in items:
+            title = e.get('title','No title').strip()
+            link = e.get('link','').strip()
+            # sanitize markdown brackets in title
+            title = title.replace('[', '\\[').replace(']', '\\]')
+            lines.append(f"- [{title}]({link})")
+
+          new_block = start + "\n" + "\n".join(lines) + "\n" + end
+
+          readme_path = "README.md"
+          if not os.path.exists(readme_path):
+            print("README.md not found — creating a new one with blog block.")
+            with open(readme_path, "w", encoding="utf-8") as f:
+              f.write(new_block + "\n")
+            print("Created README.md")
+            sys.exit(0)
+
+          with open(readme_path, "r", encoding="utf-8") as f:
+            txt = f.read()
+
+          pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+          if pattern.search(txt):
+            updated = pattern.sub(new_block, txt)
+          else:
+            # append block at end if markers missing
+            updated = txt.rstrip() + "\n\n" + new_block + "\n"
+
+          if updated != txt:
+            with open(readme_path, "w", encoding="utf-8") as f:
+              f.write(updated)
+            print("README.md updated with latest posts.")
+          else:
+            print("README.md already up to date. No changes made.")
+          PY
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git status --porcelain | grep .; then
+            git add README.md
+            git commit -m "chore: update latest blog posts"
+            git push
+            echo "Pushed changes."
+          else
+            echo "No changes to commit."
+          fi
