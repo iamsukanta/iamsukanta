@@ -1,0 +1,27 @@
+name: Update Blogger Posts
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"  # Runs every 12 hours
+  workflow_dispatch:       # Allows manual run
+
+jobs:
+  update-posts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Fetch RSS feed
+        uses: zwaldowski/rss-to-readme@v1
+        with:
+          url: "https://blog.iamsukanta.com/feeds/posts/default?alt=rss"
+          format: "- [{{ title }}]({{ link }})"
+          limit: 3
+
+      - name: Commit updated README
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update latest blog posts"
+          file_pattern: README.md
