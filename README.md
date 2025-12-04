@@ -32,4 +32,7 @@
 
 ## Recent blog posts
 <!-- BLOG-POST-LIST:START -->
+- [React Pagination Library](https://blog.iamsukanta.com/2025/08/react-pagination-library.html)
+- [Must-Know Security Practices for Every Full Stack Developer should know in 2025](https://blog.iamsukanta.com/2025/05/must-know-security-practices-for-every.html)
+- [Git essential tips | Every developer should know](https://blog.iamsukanta.com/2025/04/simple-but-essential-git-tip-when.html)
 <!-- BLOG-POST-LIST:END -->
