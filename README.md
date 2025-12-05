@@ -41,9 +41,6 @@
 <!-- BLOG-POST-LIST:END -->
 
 ## Want to know about me? Just Converse with Me
-<iframe
-	src="https://sukanta28-career-conversation.hf.space"
-	frameborder="0"
-	width="850"
-	height="450"
-></iframe>
+<a href="https://sukanta28-career-conversation.hf.space" rel="nofollow">
+    🔭 Go to my chatbox and chat with me 💬.
+</a>
