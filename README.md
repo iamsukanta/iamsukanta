@@ -31,6 +31,10 @@
 <p align="left">
     Throughout my journey as a developer, I've built several useful and impactful projects — both for companies and clients. I'm always open to collaborating with fellow developers, creative minds, and forward-thinking teams. Let’s connect on <a href="https://linkedin.com/in/iamsukanta" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 </p>
+
+<p align="left">
+    Very passionate about Automation(n8n), Generative AI and RAG applications. My recent work about Restaurant voice assistant <a href="https://inventory-voice-assistant.vercel.app" target="_blank" rel="noopener noreferrer">Voice Assistant</a>
+</p>
 <hr/>
 
 ## Recent blog posts
@@ -43,4 +47,9 @@
 ## Want to know about me? Just Converse with Me
 <a href="https://sukanta28-career-conversation.hf.space" rel="nofollow">
     🔭 Go to my chatbox and chat with me 💬.
+</a>
+
+### Realtime restaurant voice assistant built with Gemini Live AI and custom API calling
+<a href="https://inventory-voice-assistant.vercel.app/" rel="nofollow">
+    🔭 Restaurant voice assistant 💬.
 </a>
