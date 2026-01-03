@@ -33,7 +33,7 @@
 </p>
 
 <p align="left">
-    Very passionate about Automation(n8n), Generative AI and RAG applications. My recent work about Restaurant voice assistant <a href="https://inventory-voice-assistant.vercel.app" target="_blank" rel="noopener noreferrer">Voice Assistant</a>
+    Very passionate about Automation(n8n), Generative AI and RAG applications. My recent work about Restaurant voice assistant <a href="https://inventory-voice-assistant.vercel.app" target="_blank" rel="noopener noreferrer">Voice Assistant</a>, Fahrschule Voice Assistant <a href="https://fahrschule-app.vercel.app/" target="_blank" rel="noopener noreferrer">Fahrschule Assistant</a> 
 </p>
 <hr/>
 
@@ -44,7 +44,7 @@
 - [Git essential tips | Every developer should know](https://blog.iamsukanta.com/2025/04/simple-but-essential-git-tip-when.html)
 <!-- BLOG-POST-LIST:END -->
 
-## Want to know about me? Just Converse with Me
+### Want to know about me? Just Converse with Me
 <a href="https://sukanta28-career-conversation.hf.space" rel="nofollow">
     🔭 Go to my chatbox and chat with me 💬.
 </a>
@@ -52,4 +52,9 @@
 ### Realtime restaurant voice assistant built with Gemini Live AI and custom API calling
 <a href="https://inventory-voice-assistant.vercel.app/" rel="nofollow">
     🔭 Restaurant voice assistant 💬.
+</a>
+
+### Fahrschule live assistant
+<a href="https://fahrschule-app.vercel.app/" rel="nofollow">
+    🔭 Fahrschule assistant 💬.
 </a>
